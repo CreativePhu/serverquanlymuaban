@@ -1,4 +1,4 @@
-package vn.thienphu.quanlybanhang.mythread;
+package vn.thienphu.serverquanlybanhang.mythread;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

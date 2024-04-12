@@ -1,4 +1,4 @@
-package vn.thienphu.quanlybanhang.model;
+package vn.thienphu.serverquanlybanhang.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

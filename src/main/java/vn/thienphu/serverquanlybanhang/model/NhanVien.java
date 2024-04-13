@@ -2,6 +2,8 @@ package vn.thienphu.serverquanlybanhang.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,13 +51,9 @@ public class NhanVien implements Serializable {
 	@JoinColumn(name = "ten_tai_khoan")
 	private TaiKhoan taiKhoan;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_anh")
-	private Anh anh;
-
 	@OneToMany(mappedBy = "nhanVien", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	private List<HoaDon> danhSachHoaDon;
+	private Set<HoaDon> danhSachHoaDon;
 
 
 	public NhanVien(String tenNhanVien, String soDienThoai, String gmail) {

@@ -2,7 +2,11 @@ package vn.thienphu.serverquanlybanhang.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,15 +45,10 @@ public class SanPham implements Serializable {
 
 	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(name = "loaiSanPham_sanPham", joinColumns = @JoinColumn(name = "id_san_pham"), inverseJoinColumns = @JoinColumn(name = "ma_loai_sp"))
-	private List<LoaiSanPham> danhSachLoaiSanPham;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_anh")
-	private Anh anh;
-	
+	private Set<LoaiSanPham> danhSachLoaiSanPham;
 	
 	@OneToMany(mappedBy = "sanPham" ,cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	private List<ChiTietHoaDon> danhSachChiTietHoaDon;
+	private Set<ChiTietHoaDon> danhSachChiTietHoaDon;
 
 	public SanPham(String tenSanPham, float giaSanPham) {
 		this.tenSanPham = tenSanPham;
@@ -59,7 +58,7 @@ public class SanPham implements Serializable {
 
 	public void addLoaiSanPham(LoaiSanPham loaiSanPham) {
 		if (danhSachLoaiSanPham == null) {
-			danhSachLoaiSanPham = new ArrayList<LoaiSanPham>();
+			danhSachLoaiSanPham = new HashSet<LoaiSanPham>();
 		}
 		danhSachLoaiSanPham.add(loaiSanPham);
 	}
@@ -67,7 +66,7 @@ public class SanPham implements Serializable {
 	
 	public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
 		if(danhSachChiTietHoaDon == null) {
-			danhSachChiTietHoaDon = new ArrayList<ChiTietHoaDon>();
+			danhSachChiTietHoaDon = new HashSet<ChiTietHoaDon>();
 		}
 		
 		danhSachChiTietHoaDon.add(chiTietHoaDon);

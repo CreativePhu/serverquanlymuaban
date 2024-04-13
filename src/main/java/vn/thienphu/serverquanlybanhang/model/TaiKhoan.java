@@ -39,9 +39,9 @@ public class TaiKhoan implements Serializable {
 	@Column(name = "trang_thai")
 	private boolean trangThai;
 	
-	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinTable(name = "quyen_taiKhoan", joinColumns = @JoinColumn(name = "ten_tai_khoan"), inverseJoinColumns = @JoinColumn(name = "id_quyen"))
-	private List<Quyen> danhSachQuyen;
+	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name = "id_quyen")
+	private Quyen quyen;
 	
 	@OneToOne(mappedBy = "taiKhoan", cascade = CascadeType.ALL)
 	private NhanVien nhanVien;
@@ -51,11 +51,4 @@ public class TaiKhoan implements Serializable {
 		this.trangThai = trangThai;
 	}
 
-	
-	public void themQuyen(Quyen quyen) {
-		if(danhSachQuyen == null) {
-			danhSachQuyen = new ArrayList<Quyen>();
-		}
-		danhSachQuyen.add(quyen);
-	}
 }

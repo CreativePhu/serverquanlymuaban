@@ -3,7 +3,9 @@ package vn.thienphu.serverquanlybanhang.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -44,7 +46,7 @@ public class HoaDon implements Serializable {
 	private NhanVien nhanVien;
 	
 	@OneToMany(mappedBy = "hoaDon" ,cascade = CascadeType.ALL)
-	private List<ChiTietHoaDon> danhSachChiTietHoaDon;
+	private Set<ChiTietHoaDon> danhSachChiTietHoaDon;
 
 
 	public HoaDon(Date ngayLap, float tongTien) {
@@ -55,7 +57,7 @@ public class HoaDon implements Serializable {
 
 	public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
 		if(danhSachChiTietHoaDon == null) {
-			danhSachChiTietHoaDon = new ArrayList<ChiTietHoaDon>();
+			danhSachChiTietHoaDon = new HashSet<ChiTietHoaDon>();
 		}
 		danhSachChiTietHoaDon.add(chiTietHoaDon);
 	}

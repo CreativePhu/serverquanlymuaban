@@ -40,4 +40,7 @@ public class ChiTietHoaDon implements Serializable {
 	@JoinColumn(name = "id_san_pham")
 	private SanPham sanPham;
 	
+	@Column(name = "tong_tien")
+	private float tongTien;
+	
 }

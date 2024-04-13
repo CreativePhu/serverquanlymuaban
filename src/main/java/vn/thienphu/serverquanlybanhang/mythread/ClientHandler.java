@@ -35,12 +35,6 @@ public class ClientHandler implements Runnable {
 				write.newLine();
 				write.flush();
 				
-				if(socket.isClosed()) {
-					System.out.println("Client " + socket.getLocalAddress().getHostAddress() + "disconnect");
-					read.close();
-					write.close();
-					break;
-				}
 			}
 			
 		} catch (IOException e) {

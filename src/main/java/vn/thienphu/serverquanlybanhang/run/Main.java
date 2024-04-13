@@ -10,8 +10,7 @@ import vn.thienphu.serverquanlybanhang.mythread.ClientHandler;
 
 public class Main {
 	public static void main(String[] args) {
-		try {
-			ServerSocket serverSocket = new ServerSocket(1234);
+		try(ServerSocket serverSocket = new ServerSocket(1234)) {
 			ExecutorService executorService = Executors.newCachedThreadPool();
 			while (true) {
 				

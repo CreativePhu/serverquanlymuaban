@@ -1,5 +1,6 @@
 package vn.thienphu.serverquanlybanhang.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -21,8 +22,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "loai_san_pham")
-public class LoaiSanPham {
+public class LoaiSanPham implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ma_loai")

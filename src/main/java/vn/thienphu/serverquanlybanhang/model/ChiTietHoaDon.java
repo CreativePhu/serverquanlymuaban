@@ -1,5 +1,7 @@
 package vn.thienphu.serverquanlybanhang.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,8 +20,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "chi_tiet_hoa_don")
-public class ChiTietHoaDon {
+public class ChiTietHoaDon implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_chi_tiet_hoa_don")

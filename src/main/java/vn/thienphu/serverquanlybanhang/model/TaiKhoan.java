@@ -1,5 +1,6 @@
 package vn.thienphu.serverquanlybanhang.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +24,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "tai_khoan")
-public class TaiKhoan {
+public class TaiKhoan implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ten_tai_khoan")

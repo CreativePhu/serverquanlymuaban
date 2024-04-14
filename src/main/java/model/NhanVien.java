@@ -32,19 +32,19 @@ public class NhanVien implements Serializable {
 	@Column(name = "id_nhan_vien")
 	private long idNhanVien;
 
-	@Column(name = "ten_nhan_vien")
+	@Column(name = "ten_nhan_vien", nullable = false, length = 200)
 	private String tenNhanVien;
 
-	@Column(name = "so_dien_thoai")
+	@Column(name = "so_dien_thoai", nullable = false, length = 20, unique = true)
 	private String soDienThoai;
 
-	@Column(name = "gmail")
+	@Column(name = "gmail", nullable = true, length = 100, unique = true)
 	private String gmail;
 
-	@Column(name = "dia_chi")
+	@Column(name = "dia_chi", nullable = true, length = 200)
 	private String diaChi;
 
-	@Column(name = "gioi_tinh")
+	@Column(name = "gioi_tinh", nullable = false)
 	private boolean gioiTinh;
 
 	@OneToOne(cascade = CascadeType.ALL)

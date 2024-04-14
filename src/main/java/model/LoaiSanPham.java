@@ -29,7 +29,7 @@ public class LoaiSanPham implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ma_loai")
 	private long maLoai;
-	@Column(name = "ten_loai")
+	@Column(name = "ten_loai", nullable = false, length = 150)
 	private String tenLoai;
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinTable(

@@ -35,14 +35,14 @@ public class HoaDon implements Serializable {
 	@Column(name = "ma_hoa_don")
 	private long maHoaDon;
 	
-	@Column(name = "ngay_lap")
+	@Column(name = "ngay_lap", nullable = false)
 	private Date ngayLap;
 	
-	@Column(name = "tong_tien")
+	@Column(name = "tong_tien", nullable = false)
 	private float tongTien;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "id_nhan_vien")
+	@JoinColumn(name = "id_nhan_vien", nullable = false)
 	private NhanVien nhanVien;
 	
 	@OneToMany(mappedBy = "hoaDon" ,cascade = CascadeType.ALL)

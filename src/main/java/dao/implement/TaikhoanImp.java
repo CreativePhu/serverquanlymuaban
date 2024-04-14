@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.TaiKhoanInf;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import model.TaiKhoan;
 
 public class TaikhoanImp implements TaiKhoanInf{
@@ -16,7 +17,9 @@ public class TaikhoanImp implements TaiKhoanInf{
 
 	@Override
 	public List<TaiKhoan> layDanhSachTaiKhoan() {
-		return null;
+		Query query = entityManager.createQuery("select n from TaiKhoan n");
+		List<TaiKhoan> resultList = query.getResultList();
+		return resultList;
 	}
 
 }

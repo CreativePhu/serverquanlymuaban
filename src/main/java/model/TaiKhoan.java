@@ -24,19 +24,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "tai_khoan")
+
 public class TaiKhoan implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ten_tai_khoan")
-	private long tenTaiKhoan;
+	@Column(name = "id_tai_khoan")
+	private long idTaiKhoan;
 	
-	@Column(name = "mat_khau")
+	@Column(name = "ten_tai_khoan", nullable = false, length = 20, unique = true)
+	private String tenTaiKhoan;
+	
+	@Column(name = "mat_khau", nullable = false, length = 100)
 	private String matKhau;
 	
-	@Column(name = "trang_thai")
+	@Column(name = "trang_thai", nullable = false)
 	private boolean trangThai;
 	
 	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

@@ -37,10 +37,10 @@ public class SanPham implements Serializable {
 	@Column(name = "id_san_pham")
 	private long idSanPham;
 
-	@Column(name = "ten_san_pham")
+	@Column(name = "ten_san_pham", nullable = false, length = 200)
 	private String tenSanPham;
 
-	@Column(name = "gia_san_pham")
+	@Column(name = "gia_san_pham", nullable = false)
 	private float giaSanPham;
 
 	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })

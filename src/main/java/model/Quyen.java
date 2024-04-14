@@ -30,7 +30,7 @@ public class Quyen implements Serializable {
 	@Column(name = "id_quyen")
 	private long idQuyen;
 	
-	@Column(name = "ten_quyen")
+	@Column(name = "ten_quyen", length = 50, nullable = false)
 	private String tenQuyen;
 	
 	@OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })

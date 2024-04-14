@@ -1,4 +1,4 @@
-package vn.thienphu.serverquanlybanhang.run;
+package run;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import vn.thienphu.serverquanlybanhang.mythread.ClientHandler;
+import mythread.ClientHandler;
 
 public class Main {
 	public static void main(String[] args) {

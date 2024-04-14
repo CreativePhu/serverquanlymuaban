@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import dao.implement.QuyenImp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -75,7 +76,10 @@ public class NhanVien implements Serializable {
 	
 	
 
-//	public void taoTaiKhoanTuDong() {
-//		TaiKhoan taiKhoan = new TaiKhoan(gmail, diaChi, gioiTinh, null)
-//	}
+	public void taoTaiKhoanTuDong() {
+		QuyenImp quyenImp = new QuyenImp();
+		Quyen quyen = quyenImp.timQuyenBangId(1);
+		TaiKhoan taiKhoan = new TaiKhoan(soDienThoai, "123123aA", false, quyen);
+		this.taiKhoan = taiKhoan;
+	}
 }

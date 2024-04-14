@@ -6,14 +6,11 @@ import dao.TaiKhoanInf;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import model.TaiKhoan;
+import util.HibernateUtil;
 
 public class TaikhoanImp implements TaiKhoanInf{
 	
-	private EntityManager entityManager;
-	
-	public TaikhoanImp(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
+	private EntityManager entityManager = HibernateUtil.getEntityManager();
 
 	@Override
 	public List<TaiKhoan> layDanhSachTaiKhoan() {

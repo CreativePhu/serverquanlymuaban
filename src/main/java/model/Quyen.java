@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,11 +37,11 @@ public class Quyen implements Serializable {
 	@Column(name = "id_quyen")
 	private long idQuyen;
 	
-	@Column(name = "ten_quyen", length = 50, nullable = false)
+	@Column(name = "ten_quyen", length = 50, nullable = false, unique = true)
 	private String tenQuyen;
 	
-	@OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	private TaiKhoan taiKhoan;
+	@OneToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "quyen")
+	private Set<TaiKhoan> taiKhoan;
 
 	public Quyen(String tenQuyen) {
 		this.tenQuyen = tenQuyen;

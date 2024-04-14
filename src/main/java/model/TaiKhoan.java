@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,11 +18,15 @@ import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "tai_khoan")
 
@@ -50,9 +55,21 @@ public class TaiKhoan implements Serializable {
 	@OneToOne(mappedBy = "taiKhoan", cascade = CascadeType.ALL)
 	private NhanVien nhanVien;
 
-	public TaiKhoan(String matKhau, boolean trangThai) {
+	public TaiKhoan(String tenTaiKhoan, String matKhau, boolean trangThai) {
+		this.tenTaiKhoan = tenTaiKhoan;
 		this.matKhau = matKhau;
 		this.trangThai = trangThai;
 	}
+
+	public TaiKhoan(String tenTaiKhoan, String matKhau, boolean trangThai, Quyen quyen) {
+		this.tenTaiKhoan = tenTaiKhoan;
+		this.matKhau = matKhau;
+		this.trangThai = trangThai;
+		this.quyen = quyen;
+	}
+
+	
+	
+	
 
 }

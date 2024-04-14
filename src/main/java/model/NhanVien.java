@@ -16,11 +16,15 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "nhan_vien")
 public class NhanVien implements Serializable {
@@ -55,12 +59,23 @@ public class NhanVien implements Serializable {
 			CascadeType.REFRESH })
 	private Set<HoaDon> danhSachHoaDon;
 
-
-	public NhanVien(String tenNhanVien, String soDienThoai, String gmail) {
+	public NhanVien(String tenNhanVien, String soDienThoai, String gmail, String diaChi, boolean gioiTinh) {
 		this.tenNhanVien = tenNhanVien;
 		this.soDienThoai = soDienThoai;
 		this.gmail = gmail;
+		this.diaChi = diaChi;
+		this.gioiTinh = gioiTinh;
 	}
 
+	public NhanVien(String tenNhanVien, String soDienThoai, boolean gioiTinh) {
+		this.tenNhanVien = tenNhanVien;
+		this.soDienThoai = soDienThoai;
+		this.gioiTinh = gioiTinh;
+	}
+	
+	
 
+//	public void taoTaiKhoanTuDong() {
+//		TaiKhoan taiKhoan = new TaiKhoan(gmail, diaChi, gioiTinh, null)
+//	}
 }

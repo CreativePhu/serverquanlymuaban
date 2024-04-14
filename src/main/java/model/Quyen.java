@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,11 +17,15 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "quyen")
 public class Quyen implements Serializable {

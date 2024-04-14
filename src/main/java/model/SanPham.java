@@ -21,11 +21,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "san_pham")
 public class SanPham implements Serializable {
@@ -63,12 +67,4 @@ public class SanPham implements Serializable {
 		danhSachLoaiSanPham.add(loaiSanPham);
 	}
 
-	
-	public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
-		if(danhSachChiTietHoaDon == null) {
-			danhSachChiTietHoaDon = new HashSet<ChiTietHoaDon>();
-		}
-		
-		danhSachChiTietHoaDon.add(chiTietHoaDon);
-	}
 }

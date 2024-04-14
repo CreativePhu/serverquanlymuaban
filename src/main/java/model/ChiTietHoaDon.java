@@ -13,12 +13,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Entity
+@ToString
 @Table(name = "chi_tiet_hoa_don")
 public class ChiTietHoaDon implements Serializable {
 	
@@ -42,5 +47,14 @@ public class ChiTietHoaDon implements Serializable {
 	
 	@Column(name = "tong_tien", nullable = false)
 	private float tongTien;
+
+	public ChiTietHoaDon(int soLuong, SanPham sanPham, float tongTien) {
+		this.soLuong = soLuong;
+		this.sanPham = sanPham;
+		this.tongTien = tinhTongTien();
+	}
 	
+	private float tinhTongTien() {
+		return soLuong * sanPham.getGiaSanPham();
+	}
 }

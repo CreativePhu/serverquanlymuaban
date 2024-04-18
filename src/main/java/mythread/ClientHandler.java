@@ -2,8 +2,10 @@ package mythread;
 
 import dao.implement.NhanVienImp;
 import dao.implement.QuyenImp;
+import dao.implement.TaikhoanImp;
 import model.NhanVien;
 import model.Quyen;
+import model.TaiKhoan;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,6 +17,7 @@ public class ClientHandler implements Runnable {
     private Socket socket;
     private QuyenImp quyenImp = new QuyenImp();
     private NhanVienImp nhanVienImp = new NhanVienImp();
+    private TaikhoanImp taikhoanImp = new TaikhoanImp();
 
 
     public ClientHandler(Socket socket) {
@@ -38,8 +41,11 @@ public class ClientHandler implements Runnable {
                     }
                     if (message.equalsIgnoreCase("layDanhSachNhanVien")) {
                         List<NhanVien> dsNhanVien = nhanVienImp.layDanhSachNhanVien();
-                        System.out.println(dsNhanVien.size());
                         objectOutputStream.writeObject(dsNhanVien);
+                    }
+                    if (message.equalsIgnoreCase("layDanhSachTaiKhoan")) {
+                        List<TaiKhoan> dsTaiKhoan = taikhoanImp.layDanhSachTaiKhoan();
+                        objectOutputStream.writeObject(dsTaiKhoan);
                     }
                     if (message.equalsIgnoreCase("exit")) {
                         break;

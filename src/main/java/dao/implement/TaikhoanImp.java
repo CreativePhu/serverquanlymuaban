@@ -14,7 +14,7 @@ public class TaikhoanImp implements TaiKhoanInf{
 
 	@Override
 	public List<TaiKhoan> layDanhSachTaiKhoan() {
-		Query query = entityManager.createQuery("select n from TaiKhoan n");
+		Query query = entityManager.createQuery("select tk from TaiKhoan tk");
 		List<TaiKhoan> resultList = query.getResultList();
 		return resultList;
 	}

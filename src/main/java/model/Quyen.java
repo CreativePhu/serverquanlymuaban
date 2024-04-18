@@ -4,18 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -39,9 +28,6 @@ public class Quyen implements Serializable {
 	
 	@Column(name = "ten_quyen", length = 50, nullable = false, unique = true)
 	private String tenQuyen;
-	
-	@OneToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "quyen")
-	private Set<TaiKhoan> taiKhoan;
 
 	public Quyen(String tenQuyen) {
 		this.tenQuyen = tenQuyen;

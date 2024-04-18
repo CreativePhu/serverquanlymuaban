@@ -38,4 +38,10 @@ public class QuyenImp implements QuyenInf{
 		return entityManager.find(Quyen.class, id);
 	}
 
+	@Override
+	public List<Quyen> layDanhSachQuyen() {
+		Query query = entityManager.createQuery("select q from Quyen q");
+		return query.getResultList();
+	}
+
 }

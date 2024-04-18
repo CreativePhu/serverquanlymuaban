@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 import dao.implement.NhanVienImp;
 import dao.implement.QuyenImp;
@@ -34,6 +35,10 @@ public class RunDB {
 		NhanVien nhanVien = new NhanVien("Ngô Thiên Phú", "0348191482", true);
 		nhanVien.taoTaiKhoanTuDong();
 		nhanVienImp.taoNhanVien(nhanVien);
-		
+
+		List<Quyen> dsQuyen = quyenImp.layDanhSachQuyen();
+		for (Quyen q : dsQuyen) {
+			System.out.println(q);
+		}
 	}
 }

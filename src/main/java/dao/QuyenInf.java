@@ -10,4 +10,6 @@ public interface QuyenInf {
 	public List<Quyen> timQuyenBangTen(String tenQuyen);
 	
 	public Quyen timQuyenBangId(int id);
+
+	public List<Quyen> layDanhSachQuyen();
 }

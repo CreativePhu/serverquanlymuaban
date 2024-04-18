@@ -9,7 +9,6 @@
 	<persistence-unit name="JPA_ORM_QLMuaBan"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>Full name of the class</class>
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver"
 				value="org.mariadb.jdbc.Driver" />
@@ -18,12 +17,10 @@
 			<property name="jakarta.persistence.jdbc.user" value="root" />
 			<property name="jakarta.persistence.jdbc.password"
 				value="root" />
-			<!-- 
-			
+<!--			<property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
+
+
 			<property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-			-->
-			
-			<property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>

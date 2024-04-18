@@ -14,7 +14,7 @@ public class Main {
             ExecutorService executorService = Executors.newCachedThreadPool();
             while (true) {
 
-                System.out.println("Đang chờ kết nối");
+                System.out.println("Server is running..."); // server is running
                 Socket socketClient = serverSocket.accept();
                 System.out.println("client " + socketClient.getInetAddress().getHostAddress() + " is connect");
 

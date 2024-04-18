@@ -26,35 +26,35 @@ import lombok.ToString;
 @ToString
 @Table(name = "chi_tiet_hoa_don")
 public class ChiTietHoaDon implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_chi_tiet_hoa_don")
-	private long idChiTietHoaDon;
-	
-	@Column(name = "so_luong", nullable = false)
-	private int soLuong;
-	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "ma_hoa_don", nullable = false)
-	private HoaDon hoaDon;
-	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "id_san_pham", nullable = false)
-	private SanPham sanPham;
-	
-	@Column(name = "tong_tien", nullable = false)
-	private float tongTien;
+    private static final long serialVersionUID = 1L;
 
-	public ChiTietHoaDon(int soLuong, SanPham sanPham, float tongTien) {
-		this.soLuong = soLuong;
-		this.sanPham = sanPham;
-		this.tongTien = tinhTongTien();
-	}
-	
-	private float tinhTongTien() {
-		return soLuong * sanPham.getGiaSanPham();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_chi_tiet_hoa_don")
+    private long idChiTietHoaDon;
+
+    @Column(name = "so_luong", nullable = false)
+    private int soLuong;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "ma_hoa_don", nullable = false)
+    private HoaDon hoaDon;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "id_san_pham", nullable = false)
+    private SanPham sanPham;
+
+    @Column(name = "tong_tien", nullable = false)
+    private float tongTien;
+
+    public ChiTietHoaDon(int soLuong, SanPham sanPham, float tongTien) {
+        this.soLuong = soLuong;
+        this.sanPham = sanPham;
+        this.tongTien = tinhTongTien();
+    }
+
+    private float tinhTongTien() {
+        return soLuong * sanPham.getGiaSanPham();
+    }
 }

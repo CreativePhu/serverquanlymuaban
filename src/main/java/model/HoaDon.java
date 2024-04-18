@@ -31,39 +31,39 @@ import lombok.ToString;
 @Entity
 @Table(name = "hoa_don")
 public class HoaDon implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ma_hoa_don")
-	private long maHoaDon;
-	
-	@Column(name = "ngay_lap", nullable = false)
-	private Date ngayLap;
-	
-	@Column(name = "tong_tien", nullable = false)
-	private float tongTien;
-	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "id_nhan_vien", nullable = false)
-	private NhanVien nhanVien;
-	
-	@OneToMany(mappedBy = "hoaDon" ,cascade = CascadeType.ALL)
-	private Set<ChiTietHoaDon> danhSachChiTietHoaDon;
+    private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ma_hoa_don")
+    private long maHoaDon;
 
-	public HoaDon(Date ngayLap, float tongTien) {
-		this.ngayLap = ngayLap;
-		this.tongTien = tongTien;
-	}
+    @Column(name = "ngay_lap", nullable = false)
+    private Date ngayLap;
+
+    @Column(name = "tong_tien", nullable = false)
+    private float tongTien;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "id_nhan_vien", nullable = false)
+    private NhanVien nhanVien;
+
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
+    private Set<ChiTietHoaDon> danhSachChiTietHoaDon;
 
 
-	public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
-		if(danhSachChiTietHoaDon == null) {
-			danhSachChiTietHoaDon = new HashSet<ChiTietHoaDon>();
-		}
-		danhSachChiTietHoaDon.add(chiTietHoaDon);
-	}
-	
+    public HoaDon(Date ngayLap, float tongTien) {
+        this.ngayLap = ngayLap;
+        this.tongTien = tongTien;
+    }
+
+
+    public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+        if (danhSachChiTietHoaDon == null) {
+            danhSachChiTietHoaDon = new HashSet<ChiTietHoaDon>();
+        }
+        danhSachChiTietHoaDon.add(chiTietHoaDon);
+    }
+
 }

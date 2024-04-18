@@ -9,21 +9,21 @@ import java.util.concurrent.Executors;
 import mythread.ClientHandler;
 
 public class Main {
-	public static void main(String[] args) {
-		try(ServerSocket serverSocket = new ServerSocket(1234)) {
-			ExecutorService executorService = Executors.newCachedThreadPool();
-			while (true) {
-				
-				System.out.println("Đang chờ kết nối");
-				Socket socketClient = serverSocket.accept();
-				System.out.println("client " +  socketClient.getInetAddress().getHostAddress() + " is connect");
-				
-				ClientHandler clientHandler = new ClientHandler(socketClient);
-				executorService.execute(clientHandler);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(1234)) {
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            while (true) {
+
+                System.out.println("Đang chờ kết nối");
+                Socket socketClient = serverSocket.accept();
+                System.out.println("client " + socketClient.getInetAddress().getHostAddress() + " is connect");
+
+                ClientHandler clientHandler = new ClientHandler(socketClient);
+                executorService.execute(clientHandler);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

@@ -24,4 +24,10 @@ public class NhanVienImp implements NhanVienInf{
 		}
 	}
 
+	@Override
+	public List<NhanVien> layDanhSachNhanVien() {
+		return entityManager.createQuery("select nv from NhanVien nv", NhanVien.class).getResultList();
+	}
+
+
 }

@@ -28,7 +28,7 @@ public class QuyenImp implements QuyenInf{
 
 	@Override
 	public List<Quyen> timQuyenBangTen(String tenQuyen) {
-		Query query = entityManager.createQuery("select q from Quyen q where q.tenQuyen =: tenquyen");
+		Query query = entityManager.createQuery("select q from Quyen q where q.tenQuyen =: tenquyen", Quyen.class);
 		query.setParameter("tenquyen", tenQuyen);
 		return query.getResultList();
 	}
@@ -40,7 +40,7 @@ public class QuyenImp implements QuyenInf{
 
 	@Override
 	public List<Quyen> layDanhSachQuyen() {
-		Query query = entityManager.createQuery("select q from Quyen q");
+		Query query = entityManager.createQuery("select q from Quyen q", Quyen.class);
 		return query.getResultList();
 	}
 

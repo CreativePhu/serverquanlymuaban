@@ -1,5 +1,8 @@
 package mythread;
+
+import dao.implement.NhanVienImp;
 import dao.implement.QuyenImp;
+import model.NhanVien;
 import model.Quyen;
 
 import java.io.IOException;
@@ -11,6 +14,7 @@ import java.util.List;
 public class ClientHandler implements Runnable {
     private Socket socket;
     private QuyenImp quyenImp = new QuyenImp();
+    private NhanVienImp nhanVienImp = new NhanVienImp();
 
 
     public ClientHandler(Socket socket) {
@@ -26,14 +30,21 @@ public class ClientHandler implements Runnable {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             while (true) {
                 Object object = objectInputStream.readObject();
-                if(object instanceof String){
+                if (object instanceof String) {
                     String message = (String) object;
-                    if(message.equalsIgnoreCase("layDanhSachQuyen")){
+                    if (message.equalsIgnoreCase("layDanhSachQuyen")) {
                         List<Quyen> dsQuyen = quyenImp.layDanhSachQuyen();
-                        System.out.println(dsQuyen.size());
                         objectOutputStream.writeObject(dsQuyen);
-                        objectOutputStream.flush();
                     }
+                    if (message.equalsIgnoreCase("layDanhSachNhanVien")) {
+                        List<NhanVien> dsNhanVien = nhanVienImp.layDanhSachNhanVien();
+                        System.out.println(dsNhanVien.size());
+                        objectOutputStream.writeObject(dsNhanVien);
+                    }
+                    if (message.equalsIgnoreCase("exit")) {
+                        break;
+                    }
+                    objectOutputStream.flush();
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

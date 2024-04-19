@@ -1,29 +1,30 @@
 package run;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import mythread.ClientHandler;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import dao.NhanVienInf;
+import dao.QuyenInf;
+import dao.TaiKhoanInf;
+import dao.implement.NhanVienImp;
+import dao.implement.QuyenImp;
+import dao.implement.TaikhoanImp;
+import util.ConnectDB;
 
 public class Main {
-    public static void main(String[] args) {
-        try (ServerSocket serverSocket = new ServerSocket(1234)) {
-            ExecutorService executorService = Executors.newCachedThreadPool();
-            while (true) {
+    public static void main(String[] args) throws RemoteException {
+        Registry registry = LocateRegistry.createRegistry(1234);
 
-                System.out.println("Server is running..."); // server is running
-                Socket socketClient = serverSocket.accept();
-                System.out.println("client " + socketClient.getInetAddress().getHostAddress() + " is connect");
+        ConnectDB connectDB = new ConnectDB();
 
-                ClientHandler clientHandler = new ClientHandler(socketClient);
-                executorService.execute(clientHandler);
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        NhanVienInf nhanVienInf = new NhanVienImp(connectDB.getEntityManager());
+        QuyenInf quyenInf = new QuyenImp(connectDB.getEntityManager());
+        TaiKhoanInf taiKhoanInf = new TaikhoanImp(connectDB.getEntityManager());
+
+        registry.rebind("nhanVienInf", nhanVienInf);
+        registry.rebind("quyenInf", quyenInf);
+        registry.rebind("taiKhoanInf", taiKhoanInf);
+
+        System.out.println("Server ready");
     }
 }

@@ -1,18 +1,24 @@
 package dao.implement;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import dao.NhanVienInf;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import model.NhanVien;
-import util.HibernateUtil;
+import util.ConnectDB;
 
-public class NhanVienImp implements NhanVienInf{
+public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 	
-	private EntityManager entityManager = HibernateUtil.getEntityManager();
+	private EntityManager entityManager;
+
+	public NhanVienImp(EntityManager entityManager) throws RemoteException {
+        this.entityManager = entityManager;
+	}
 
 	@Override
-	public void taoNhanVien(NhanVien nhanVien) {
+	public void taoNhanVien(NhanVien nhanVien) throws RemoteException {
 		EntityTransaction session = entityManager.getTransaction();
 		try {
 			session.begin();
@@ -25,7 +31,7 @@ public class NhanVienImp implements NhanVienInf{
 	}
 
 	@Override
-	public List<NhanVien> layDanhSachNhanVien() {
+	public List<NhanVien> layDanhSachNhanVien() throws RemoteException {
 		return entityManager.createQuery("select nv from NhanVien nv", NhanVien.class).getResultList();
 	}
 

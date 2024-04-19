@@ -1,10 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
-
-import dao.implement.QuyenImp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,8 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -72,14 +67,5 @@ public class NhanVien implements Serializable {
 		this.tenNhanVien = tenNhanVien;
 		this.soDienThoai = soDienThoai;
 		this.gioiTinh = gioiTinh;
-	}
-	
-	
-
-	public void taoTaiKhoanTuDong() {
-		QuyenImp quyenImp = new QuyenImp();
-		Quyen quyen = quyenImp.timQuyenBangId(1);
-		TaiKhoan taiKhoan = new TaiKhoan(soDienThoai, "123123aA", false, quyen);
-		this.taiKhoan = taiKhoan;
 	}
 }

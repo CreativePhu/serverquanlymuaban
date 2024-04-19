@@ -1,11 +1,12 @@
 package dao;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import model.NhanVien;
 
-public interface NhanVienInf {
-	public void taoNhanVien(NhanVien nhanVien);
-
-	public List<NhanVien> layDanhSachNhanVien();
+public interface NhanVienInf extends Remote {
+	public void taoNhanVien(NhanVien nhanVien) throws RemoteException;
+	public List<NhanVien> layDanhSachNhanVien() throws RemoteException;
 }

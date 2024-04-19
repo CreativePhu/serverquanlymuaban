@@ -1,27 +1,24 @@
 package run;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Base64;
+import java.rmi.RemoteException;
 import java.util.List;
 
 import dao.implement.NhanVienImp;
 import dao.implement.QuyenImp;
-import dao.implement.TaikhoanImp;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import model.NhanVien;
 import model.Quyen;
-import model.TaiKhoan;
-import util.HibernateUtil;
 
 public class RunDB {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException {
+
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA_ORM_QLMuaBan");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
-		QuyenImp quyenImp = new QuyenImp();
-		NhanVienImp nhanVienImp = new NhanVienImp();
+		QuyenImp quyenImp = new QuyenImp(entityManager);
+		NhanVienImp nhanVienImp = new NhanVienImp(entityManager);
 		
 		Quyen quyen = new Quyen("Staff");
 		Quyen quyen1 = new Quyen("Manager");
@@ -33,7 +30,7 @@ public class RunDB {
 //		System.out.println(quyen2);
 		
 		NhanVien nhanVien = new NhanVien("Ngô Thiên Phú", "0348191482", true);
-		nhanVien.taoTaiKhoanTuDong();
+//		nhanVien.taoTaiKhoanTuDong();
 		nhanVienImp.taoNhanVien(nhanVien);
 
 		List<Quyen> dsQuyen = quyenImp.layDanhSachQuyen();

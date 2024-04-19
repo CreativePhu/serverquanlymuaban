@@ -16,7 +16,7 @@ import model.Quyen;
 import model.SanPham;
 import model.TaiKhoan;
 
-public class RunDB {
+public class RunDatabaseTest {
 	public static void main(String[] args) throws RemoteException {
 
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA_ORM_QLMuaBan");
@@ -54,8 +54,7 @@ public class RunDB {
 		
 		SanPham sanPham = new SanPham("Pessi", 10000);
 		LoaiSanPham newLoaiSanPham = loaiSanPhamImp.timLoaiSanPhamBangTen("Đồ Uống").get(0);
-		sanPham.addLoaiSanPham(newLoaiSanPham);
-		
+		sanPham.setLoaiSanPham(newLoaiSanPham);
 		sanphamImp.taoSanPham(sanPham);
 		
 	    entityManager.close();

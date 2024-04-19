@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
@@ -47,24 +48,13 @@ public class SanPham implements Serializable {
 	@Column(name = "gia_san_pham", nullable = false)
 	private float giaSanPham;
 
-	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinTable(name = "loaiSanPham_sanPham", joinColumns = @JoinColumn(name = "id_san_pham"), inverseJoinColumns = @JoinColumn(name = "ma_loai_sp"))
-	private Set<LoaiSanPham> danhSachLoaiSanPham;
-	
-	@OneToMany(mappedBy = "sanPham" ,cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	private Set<ChiTietHoaDon> danhSachChiTietHoaDon;
+	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	@JoinColumn(name = "id_loai_san_pham")
+	private LoaiSanPham loaiSanPham;
 
 	public SanPham(String tenSanPham, float giaSanPham) {
 		this.tenSanPham = tenSanPham;
 		this.giaSanPham = giaSanPham;
-	}
-
-
-	public void addLoaiSanPham(LoaiSanPham loaiSanPham) {
-		if (danhSachLoaiSanPham == null) {
-			danhSachLoaiSanPham = new HashSet<LoaiSanPham>();
-		}
-		danhSachLoaiSanPham.add(loaiSanPham);
 	}
 
 }

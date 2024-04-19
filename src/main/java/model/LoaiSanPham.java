@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,10 +37,6 @@ public class LoaiSanPham implements Serializable {
 
     @Column(name = "ten_loai", nullable = false, length = 150)
     private String tenLoai;
-
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "loaiSanPham_sanPham", joinColumns = @JoinColumn(name = "ma_loai_sp"), inverseJoinColumns = @JoinColumn(name = "id_san_pham"))
-    private List<SanPham> danhSachSanPham;
 
     public LoaiSanPham(String tenLoai) {
         this.tenLoai = tenLoai;

@@ -41,8 +41,7 @@ public class LoaiSanPham implements Serializable {
     @JoinTable(name = "loaiSanPham_sanPham", joinColumns = @JoinColumn(name = "ma_loai_sp"), inverseJoinColumns = @JoinColumn(name = "id_san_pham"))
     private List<SanPham> danhSachSanPham;
 
-    public LoaiSanPham(long maLoai, String tenLoai) {
-        this.maLoai = maLoai;
+    public LoaiSanPham(String tenLoai) {
         this.tenLoai = tenLoai;
     }
 

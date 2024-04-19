@@ -24,7 +24,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "loai_san_pham")
 public class LoaiSanPham implements Serializable {
@@ -42,5 +41,10 @@ public class LoaiSanPham implements Serializable {
         this.tenLoai = tenLoai;
     }
 
+	@Override
+	public String toString() {
+		return tenLoai;
+	}
 
+    
 }

@@ -36,11 +36,11 @@ public class RunDatabaseTest {
 //		Quyen quyen2 = quyenImp.timQuyenBangTen("Staff").get(0);
 //		System.out.println(quyen2);
 		
-		NhanVien nhanVien = new NhanVien("Tran The Bao", "0348579651", false);
-		Quyen newQuyen = quyenImp.timQuyenBangTen("Staff").get(0);
-        TaiKhoan taiKhoan = new TaiKhoan("0481231382", "123123aA", false, newQuyen);
-        nhanVien.setTaiKhoan(taiKhoan);
-		nhanVienImp.taoNhanVien(nhanVien);
+//		NhanVien nhanVien = new NhanVien("Tran The Bao", "0348579651", false);
+//		Quyen newQuyen = quyenImp.timQuyenBangTen("Staff").get(0);
+//        TaiKhoan taiKhoan = new TaiKhoan("0481231382", "123123aA", false, newQuyen);
+//        nhanVien.setTaiKhoan(taiKhoan);
+//		nhanVienImp.taoNhanVien(nhanVien);
 
 //		List<Quyen> dsQuyen = quyenImp.layDanhSachQuyen();
 //		for (Quyen q : dsQuyen) {

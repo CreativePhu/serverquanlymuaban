@@ -10,4 +10,6 @@ public interface NhanVienInf extends Remote {
 	public void taoNhanVien(NhanVien nhanVien) throws RemoteException;
 	public List<NhanVien> layDanhSachNhanVien() throws RemoteException;
 	public List<NhanVien> timKiemNhanVien(String maNhanVien, String tenNhanVien,  String soDienThoai, String gioiTinh) throws RemoteException;
+	public void capNhatNhanVien(NhanVien nhanVien) throws RemoteException;
+	public void xoaNhanVien(String nhanVienID) throws RemoteException;
 }

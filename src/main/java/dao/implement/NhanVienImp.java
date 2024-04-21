@@ -7,6 +7,7 @@ import dao.NhanVienInf;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import model.HoaDon;
 import model.NhanVien;
 import util.ConnectDB;
 
@@ -68,6 +69,36 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 			query.setParameter("gioiTinh", gioiTinh.equals("Nam") ? true : false);
 		}
 		return query.getResultList();
+	}
+
+	@Override
+	public void capNhatNhanVien(NhanVien nhanVien) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
+		try {
+			session.begin();
+			entityManager.merge(nhanVien);
+			entityManager.flush();
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}
+	}
+
+	@Override
+	public void xoaNhanVien(String nhanVienID) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
+		try {
+			session.begin();
+			NhanVien nhanVienDB = entityManager.find(NhanVien.class, Long.parseLong(nhanVienID));
+			for (HoaDon hoaDon : nhanVienDB.getDanhSachHoaDon()) {
+				hoaDon.setNhanVien(null);
+			}
+			entityManager.remove(nhanVienDB);
+			entityManager.flush();
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}
 	}
 
 

@@ -23,7 +23,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@ToString
 @Table(name = "chi_tiet_hoa_don")
 public class ChiTietHoaDon implements Serializable {
 
@@ -56,5 +55,16 @@ public class ChiTietHoaDon implements Serializable {
 
     private float tinhTongTien() {
         return soLuong * sanPham.getGiaSanPham();
+    }
+
+    @Override
+    public String toString() {
+        return "ChiTietHoaDon{" +
+                "idChiTietHoaDon=" + idChiTietHoaDon +
+                ", soLuong=" + soLuong +
+                ", hoaDon=" + hoaDon +
+                ", sanPham=" + sanPham +
+                ", tongTien=" + tongTien +
+                '}';
     }
 }

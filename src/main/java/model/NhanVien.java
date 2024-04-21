@@ -20,7 +20,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "nhan_vien")
 public class NhanVien implements Serializable {
@@ -67,5 +66,17 @@ public class NhanVien implements Serializable {
 		this.tenNhanVien = tenNhanVien;
 		this.soDienThoai = soDienThoai;
 		this.gioiTinh = gioiTinh;
+	}
+
+	@Override
+	public String toString() {
+		return "NhanVien{" +
+				"idNhanVien=" + idNhanVien +
+				", tenNhanVien='" + tenNhanVien + '\'' +
+				", soDienThoai='" + soDienThoai + '\'' +
+				", gmail='" + gmail + '\'' +
+				", diaChi='" + diaChi + '\'' +
+				", gioiTinh=" + gioiTinh +
+				'}';
 	}
 }

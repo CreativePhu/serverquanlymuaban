@@ -18,7 +18,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "hoa_don")
 public class HoaDon implements Serializable {
@@ -57,4 +56,12 @@ public class HoaDon implements Serializable {
         danhSachChiTietHoaDon.add(chiTietHoaDon);
     }
 
+    @Override
+    public String toString() {
+        return "HoaDon{" +
+                "tongTien=" + tongTien +
+                ", ngayLap=" + ngayLap +
+                ", maHoaDon=" + maHoaDon +
+                '}';
+    }
 }

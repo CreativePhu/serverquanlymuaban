@@ -6,6 +6,7 @@ import java.util.List;
 
 import dao.SanPhamInf;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import model.SanPham;
 
 public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
@@ -32,5 +33,35 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 	@Override
 	public List<SanPham> layDanhSachSanPham() {
 		return entityManager.createQuery("SELECT sp FROM SanPham sp", SanPham.class).getResultList();
+	}
+
+	@Override
+	public List<SanPham> timKiemSanPham(String maSanPham, String tenSanPham, String loaiSanPham) throws RemoteException {
+
+		String query = "SELECT sp FROM SanPham sp WHERE 1=1";
+
+		if (!maSanPham.isEmpty()) {
+			query += " AND sp.idSanPham = :maSanPham";
+		}
+		if (!tenSanPham.isEmpty()) {
+			query += " AND sp.tenSanPham LIKE :tenSanPham";
+		}
+		if (!loaiSanPham.isEmpty()) {
+			query += " AND sp.loaiSanPham.tenLoai = :loaiSanPham";
+		}
+
+		Query q = entityManager.createQuery(query, SanPham.class);
+
+		if (!maSanPham.isEmpty()) {
+			q.setParameter("maSanPham", Long.parseLong(maSanPham));
+		}
+		if (!tenSanPham.isEmpty()) {
+			q.setParameter("tenSanPham", "%" + tenSanPham + "%");
+		}
+		if (!loaiSanPham.isEmpty()) {
+			q.setParameter("loaiSanPham", loaiSanPham);
+		}
+
+		return q.getResultList();
 	}
 }

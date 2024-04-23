@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,5 +47,16 @@ public class LoaiSanPham implements Serializable {
 		return tenLoai;
 	}
 
-    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LoaiSanPham that = (LoaiSanPham) o;
+        return maLoai == that.maLoai && Objects.equals(tenLoai, that.tenLoai);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maLoai, tenLoai);
+    }
 }

@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -37,4 +38,16 @@ public class Quyen implements Serializable {
 		return tenQuyen;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Quyen quyen = (Quyen) o;
+		return idQuyen == quyen.idQuyen && Objects.equals(tenQuyen, quyen.tenQuyen);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idQuyen, tenQuyen);
+	}
 }

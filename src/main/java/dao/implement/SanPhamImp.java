@@ -19,14 +19,17 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 		entityManager = entityManager1;
 	}
 
+
 	@Override
-	public void taoSanPham(SanPham sanPham) {
+	public void taoSanPham(SanPham sanPham, Long maLoaiSanPham) throws RemoteException {
 		try {
 			entityManager.getTransaction().begin();
+			sanPham.setLoaiSanPham(entityManager.find(model.LoaiSanPham.class, maLoaiSanPham));
 			entityManager.persist(sanPham);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
+
 		}
 	}
 
@@ -63,5 +66,29 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 		}
 
 		return q.getResultList();
+	}
+
+	@Override
+	public void capNhatSanPham(SanPham sanPham, Long maLoaiSanPham) throws RemoteException {
+		try {
+			entityManager.getTransaction().begin();
+			sanPham.setLoaiSanPham(entityManager.find(model.LoaiSanPham.class, maLoaiSanPham));
+			entityManager.merge(sanPham);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+		}
+	}
+
+	@Override
+	public void xoaSanPham(Long idSanPham) throws RemoteException {
+		try {
+			entityManager.getTransaction().begin();
+			SanPham sanPham = entityManager.find(SanPham.class, idSanPham);
+			entityManager.remove(sanPham);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+		}
 	}
 }

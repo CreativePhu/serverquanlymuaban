@@ -38,6 +38,9 @@ public class LoaiSanPham implements Serializable {
     @Column(name = "ten_loai", nullable = false, length = 150)
     private String tenLoai;
 
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "loaiSanPham")
+    private List<SanPham> sanPham;
+
     public LoaiSanPham(String tenLoai) {
         this.tenLoai = tenLoai;
     }

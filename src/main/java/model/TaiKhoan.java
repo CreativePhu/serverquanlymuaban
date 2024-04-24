@@ -42,7 +42,7 @@ public class TaiKhoan implements Serializable {
 	@JoinColumn(name = "id_quyen")
 	private Quyen quyen;
 	
-	@OneToOne(mappedBy = "taiKhoan", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "taiKhoan", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private NhanVien nhanVien;
 
 	public TaiKhoan(String tenTaiKhoan, String matKhau, boolean trangThai) {

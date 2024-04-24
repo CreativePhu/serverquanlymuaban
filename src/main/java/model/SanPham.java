@@ -35,26 +35,34 @@ import lombok.ToString;
 @Table(name = "san_pham")
 public class SanPham implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_san_pham")
-	private long idSanPham;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_san_pham")
+    private long idSanPham;
 
-	@Column(name = "ten_san_pham", nullable = false, length = 200)
-	private String tenSanPham;
+    @Column(name = "ten_san_pham", nullable = false, length = 200)
+    private String tenSanPham;
 
-	@Column(name = "gia_san_pham", nullable = false)
-	private float giaSanPham;
+    @Column(name = "gia_san_pham", nullable = false)
+    private float giaSanPham;
 
-	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_loai_san_pham")
-	private LoaiSanPham loaiSanPham;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "id_loai_san_pham")
+    private LoaiSanPham loaiSanPham;
 
-	public SanPham(String tenSanPham, float giaSanPham) {
-		this.tenSanPham = tenSanPham;
-		this.giaSanPham = giaSanPham;
-	}
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "sanPham")
+    private List<ChiTietHoaDon> chiTietHoaDon;
 
+    public SanPham(String tenSanPham, float giaSanPham) {
+        this.tenSanPham = tenSanPham;
+        this.giaSanPham = giaSanPham;
+    }
+
+    public SanPham(long idSanPham, String tenSanPham, float giaSanPham) {
+        this.idSanPham = idSanPham;
+        this.tenSanPham = tenSanPham;
+        this.giaSanPham = giaSanPham;
+    }
 }

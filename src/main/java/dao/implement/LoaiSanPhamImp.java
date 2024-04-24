@@ -6,8 +6,10 @@ import java.util.List;
 
 import dao.LoaiSanPhamInf;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import model.LoaiSanPham;
+import org.hibernate.Session;
 
 public class LoaiSanPhamImp extends UnicastRemoteObject implements LoaiSanPhamInf{
 	
@@ -21,12 +23,14 @@ public class LoaiSanPhamImp extends UnicastRemoteObject implements LoaiSanPhamIn
 
 	@Override
 	public void taoLoaiSanPham(LoaiSanPham loaiSanPham) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
 		try {
-			entityManager.getTransaction().begin();
+			session.begin();
 			entityManager.persist(loaiSanPham);
-			entityManager.getTransaction().commit();
+			entityManager.flush();
+			session.commit();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			session.rollback();
 		}
 		
 	}
@@ -42,6 +46,9 @@ public class LoaiSanPhamImp extends UnicastRemoteObject implements LoaiSanPhamIn
 		query.setParameter("tenLoai", tenLoai);
 		return query.getResultList();
 	}
-	
+
+	public LoaiSanPham timLoaiSanPhamBangId(long id) throws RemoteException {
+		return entityManager.find(LoaiSanPham.class, id);
+	}
 	
 }

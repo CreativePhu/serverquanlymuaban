@@ -58,8 +58,10 @@ public class TaiKhoan implements Serializable {
 		this.quyen = quyen;
 	}
 
-
-
-
-
+	public TaiKhoan(long idTaiKhoan, String tenTaiKhoan, String matKhau, boolean trangThai) {
+		this.idTaiKhoan = idTaiKhoan;
+		this.tenTaiKhoan = tenTaiKhoan;
+		this.matKhau = matKhau;
+		this.trangThai = trangThai;
+	}
 }

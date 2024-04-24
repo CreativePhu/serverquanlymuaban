@@ -8,4 +8,5 @@ import model.TaiKhoan;
 
 public interface TaiKhoanInf extends Remote {
 	public List<TaiKhoan> layDanhSachTaiKhoan() throws RemoteException;
+	public void capNhatTaiKhoan(TaiKhoan taiKhoan, Long maQuyenHan) throws RemoteException;
 }

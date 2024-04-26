@@ -56,6 +56,14 @@ public class HoaDon implements Serializable {
         danhSachChiTietHoaDon.add(chiTietHoaDon);
     }
 
+    public void tinhtongTien() {
+        float tongTien = 0;
+        for (ChiTietHoaDon chiTietHoaDon : danhSachChiTietHoaDon) {
+            tongTien += chiTietHoaDon.getTongTien();
+        }
+        this.tongTien = tongTien;
+    }
+
     @Override
     public String toString() {
         return "HoaDon{" +

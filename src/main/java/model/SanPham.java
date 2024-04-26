@@ -30,7 +30,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "san_pham")
 public class SanPham implements Serializable {
@@ -52,6 +51,7 @@ public class SanPham implements Serializable {
     @JoinColumn(name = "id_loai_san_pham")
     private LoaiSanPham loaiSanPham;
 
+
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "sanPham")
     private List<ChiTietHoaDon> chiTietHoaDon;
 
@@ -64,5 +64,10 @@ public class SanPham implements Serializable {
         this.idSanPham = idSanPham;
         this.tenSanPham = tenSanPham;
         this.giaSanPham = giaSanPham;
+    }
+
+    @Override
+    public String toString() {
+        return idSanPham+"";
     }
 }

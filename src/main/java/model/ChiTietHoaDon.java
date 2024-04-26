@@ -47,7 +47,7 @@ public class ChiTietHoaDon implements Serializable {
     @Column(name = "tong_tien", nullable = false)
     private float tongTien;
 
-    public ChiTietHoaDon(int soLuong, SanPham sanPham, float tongTien) {
+    public ChiTietHoaDon(int soLuong, SanPham sanPham) {
         this.soLuong = soLuong;
         this.sanPham = sanPham;
         this.tongTien = tinhTongTien();
@@ -67,4 +67,6 @@ public class ChiTietHoaDon implements Serializable {
                 ", tongTien=" + tongTien +
                 '}';
     }
+
+
 }

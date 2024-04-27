@@ -42,12 +42,10 @@ public class HoaDon implements Serializable {
     @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ChiTietHoaDon> danhSachChiTietHoaDon;
 
-
-    public HoaDon(Date ngayLap, float tongTien) {
+    public HoaDon(Date ngayLap, NhanVien nhanVien) {
         this.ngayLap = ngayLap;
-        this.tongTien = tongTien;
+        this.nhanVien = nhanVien;
     }
-
 
     public void themChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
         if (danhSachChiTietHoaDon == null) {

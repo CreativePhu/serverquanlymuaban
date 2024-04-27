@@ -39,4 +39,38 @@ public class TaikhoanImp extends UnicastRemoteObject implements TaiKhoanInf{
 		}
 	}
 
+	@Override
+	public List<TaiKhoan> timKiemTaiKhoan(String tenTaiKhoan, String maQuyen, String tenTrangThai) throws RemoteException {
+		String query = "select tk from TaiKhoan tk where 1=1";
+
+		if(tenTaiKhoan != null && !tenTaiKhoan.isEmpty()) {
+			query += " and tk.tenTaiKhoan like :tenTaiKhoan";
+		}
+
+		if(maQuyen != null && !maQuyen.isEmpty()) {
+			query += " and tk.quyen.idQuyen = :maQuyen";
+		}
+
+		if (tenTrangThai != null && !tenTrangThai.isEmpty()) {
+			query += " and tk.trangThai = :trangThai";
+		}
+
+		Query q = entityManager.createQuery(query);
+
+		if(tenTaiKhoan != null && !tenTaiKhoan.isEmpty()) {
+			q.setParameter("tenTaiKhoan", "%" + tenTaiKhoan + "%");
+		}
+
+		if(maQuyen != null && !maQuyen.isEmpty()) {
+			q.setParameter("maQuyen", Long.parseLong(maQuyen));
+		}
+
+		if (tenTrangThai != null && !tenTrangThai.isEmpty()) {
+			q.setParameter("trangThai", tenTrangThai.equals("Kích hoạt") ? true : false);
+		}
+
+		List<TaiKhoan> resultList = q.getResultList();
+		return resultList;
+	}
+
 }

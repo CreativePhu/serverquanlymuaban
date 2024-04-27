@@ -80,13 +80,6 @@ public class NhanVien implements Serializable {
 
     @Override
     public String toString() {
-        return "NhanVien{" +
-                "idNhanVien=" + idNhanVien +
-                ", tenNhanVien='" + tenNhanVien + '\'' +
-                ", soDienThoai='" + soDienThoai + '\'' +
-                ", gmail='" + gmail + '\'' +
-                ", diaChi='" + diaChi + '\'' +
-                ", gioiTinh=" + gioiTinh +
-                '}';
+        return idNhanVien + "";
     }
 }

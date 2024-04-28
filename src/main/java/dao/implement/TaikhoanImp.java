@@ -73,4 +73,18 @@ public class TaikhoanImp extends UnicastRemoteObject implements TaiKhoanInf{
 		return resultList;
 	}
 
+	@Override
+	public TaiKhoan xacThucTaiKhoan(String tenTaiKhoan, String matKhau) throws RemoteException {
+		Query query = entityManager.createQuery("select tk from TaiKhoan tk where tk.tenTaiKhoan = :tenTaiKhoan and tk.matKhau = :matKhau");
+		query.setParameter("tenTaiKhoan", tenTaiKhoan);
+		query.setParameter("matKhau", matKhau);
+		List<TaiKhoan> resultList = query.getResultList();
+
+		if(resultList.size() > 0) {
+			return resultList.get(0);
+		}
+
+		return null;
+	}
+
 }

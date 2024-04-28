@@ -118,5 +118,12 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 		}
 	}
 
+	@Override
+	public NhanVien layNhanVienTheoTenTaiKhoan(String tenTaiKhoan) throws RemoteException {
+		Query query = entityManager.createQuery("select nv from NhanVien nv where nv.taiKhoan.tenTaiKhoan = :tenTaiKhoan", NhanVien.class);
+		query.setParameter("tenTaiKhoan", tenTaiKhoan);
+		return (NhanVien) query.getSingleResult();
+	}
+
 
 }

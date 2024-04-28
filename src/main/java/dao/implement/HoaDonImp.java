@@ -107,5 +107,10 @@ public class HoaDonImp extends UnicastRemoteObject implements HoaDonInf {
         }
     }
 
+    @Override
+    public HoaDon layHoaDonTheoMa(String maHoaDon) throws RemoteException {
+        return entityManager.find(HoaDon.class, Long.parseLong(maHoaDon));
+    }
+
 
 }

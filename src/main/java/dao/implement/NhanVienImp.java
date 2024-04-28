@@ -4,12 +4,14 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import dao.NhanVienInf;
+import dao.QuyenInf;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import model.HoaDon;
 import model.NhanVien;
-import util.ConnectDB;
+import model.Quyen;
+import model.TaiKhoan;
 
 public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 	
@@ -24,6 +26,21 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 		EntityTransaction session = entityManager.getTransaction();
 		try {
 			session.begin();
+			// Tạo tài khoản cho nhân viên
+			QuyenInf quyenInf = new QuyenImp(entityManager);
+			// Lấy quyền nhân viên
+			Quyen quyen = quyenInf.timQuyenBangTen("Nhân viên").get(0);
+			// Tạo tài khoản
+			TaiKhoan taiKhoan = new TaiKhoan();
+			taiKhoan.setQuyen(quyen);
+			taiKhoan.setTenTaiKhoan(nhanVien.getSoDienThoai());
+			taiKhoan.setMatKhau("123123aA");
+			taiKhoan.setTrangThai(false);
+			// Set nhân viên cho tài khoản
+			taiKhoan.setNhanVien(nhanVien);
+			// Set tài khoản cho nhân viên
+			nhanVien.setTaiKhoan(taiKhoan);
+			// Lưu nhân viên
 			entityManager.persist(nhanVien);
 			entityManager.flush();
 			session.commit();

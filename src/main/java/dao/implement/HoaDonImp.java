@@ -80,4 +80,32 @@ public class HoaDonImp extends UnicastRemoteObject implements HoaDonInf {
 
         return q.getResultList();
     }
+
+    @Override
+    public void capNhatNgayLapHoaDon(String maHoaDon, Date ngayLapMoi) throws RemoteException {
+        try {
+            entityManager.getTransaction().begin();
+            HoaDon hoaDon = entityManager.find(HoaDon.class, Long.parseLong(maHoaDon));
+            hoaDon.setNgayLap(ngayLapMoi);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void xoaHoaDon(String maHoaDon) throws RemoteException {
+        try {
+            entityManager.getTransaction().begin();
+            HoaDon hoaDon = entityManager.find(HoaDon.class, Long.parseLong(maHoaDon));
+            entityManager.remove(hoaDon);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+
 }

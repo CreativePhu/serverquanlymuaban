@@ -14,4 +14,6 @@ public interface QuyenInf extends Remote {
 	public Quyen timQuyenBangId(int id) throws RemoteException;
 
 	public List<Quyen> layDanhSachQuyen() throws RemoteException;
+	public void capNhatQuyen(Quyen quyen) throws RemoteException;
+	public void xoaQuyen(int id) throws RemoteException;
 }

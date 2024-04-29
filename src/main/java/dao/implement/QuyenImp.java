@@ -50,4 +50,31 @@ public class QuyenImp extends UnicastRemoteObject implements QuyenInf{
 		return query.getResultList();
 	}
 
+	@Override
+	public void capNhatQuyen(Quyen quyen) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
+		try {
+			session.begin();
+			entityManager.merge(quyen);
+			entityManager.flush();
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}
+	}
+
+	@Override
+	public void xoaQuyen(int id) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
+		try {
+			session.begin();
+			Quyen quyen = entityManager.find(Quyen.class, id);
+			entityManager.remove(quyen);
+			entityManager.flush();
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}
+	}
+
 }

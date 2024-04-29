@@ -50,5 +50,32 @@ public class LoaiSanPhamImp extends UnicastRemoteObject implements LoaiSanPhamIn
 	public LoaiSanPham timLoaiSanPhamBangId(long id) throws RemoteException {
 		return entityManager.find(LoaiSanPham.class, id);
 	}
-	
+
+	@Override
+	public void xoaLoaiSanPham(long id) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
+		try {
+			session.begin();
+			LoaiSanPham loaiSanPham = entityManager.find(LoaiSanPham.class, id);
+			entityManager.remove(loaiSanPham);
+			entityManager.flush();
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}
+	}
+
+	@Override
+	public void capNhatLoaiSanPham(LoaiSanPham loaiSanPham) throws RemoteException {
+		EntityTransaction session = entityManager.getTransaction();
+		try {
+			session.begin();
+			entityManager.merge(loaiSanPham);
+			entityManager.flush();
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}
+	}
+
 }

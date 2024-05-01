@@ -9,7 +9,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import model.Quyen;
-import util.ConnectDB;
 
 public class QuyenImp extends UnicastRemoteObject implements QuyenInf{
 	

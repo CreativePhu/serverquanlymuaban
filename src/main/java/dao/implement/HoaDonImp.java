@@ -38,7 +38,6 @@ public class HoaDonImp extends UnicastRemoteObject implements HoaDonInf {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            e.printStackTrace();
         }
     }
 
@@ -90,7 +89,6 @@ public class HoaDonImp extends UnicastRemoteObject implements HoaDonInf {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            e.printStackTrace();
         }
     }
 
@@ -103,7 +101,6 @@ public class HoaDonImp extends UnicastRemoteObject implements HoaDonInf {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            e.printStackTrace();
         }
     }
 

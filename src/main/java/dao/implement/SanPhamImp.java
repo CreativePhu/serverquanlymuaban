@@ -6,6 +6,7 @@ import java.util.List;
 
 import dao.SanPhamInf;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import model.SanPham;
 
@@ -82,13 +83,14 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 
 	@Override
 	public void xoaSanPham(Long idSanPham) throws RemoteException {
+		EntityTransaction transaction = entityManager.getTransaction();
 		try {
-			entityManager.getTransaction().begin();
+			transaction.begin();
 			SanPham sanPham = entityManager.find(SanPham.class, idSanPham);
 			entityManager.remove(sanPham);
-			entityManager.getTransaction().commit();
+			transaction.commit();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+            transaction.rollback();
 		}
 	}
 }

@@ -110,6 +110,8 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 			for (HoaDon hoaDon : nhanVienDB.getDanhSachHoaDon()) {
 				hoaDon.setNhanVien(null);
 			}
+			TaiKhoan taiKhoan = nhanVienDB.getTaiKhoan();
+			entityManager.remove(taiKhoan);
 			entityManager.remove(nhanVienDB);
 			entityManager.flush();
 			session.commit();

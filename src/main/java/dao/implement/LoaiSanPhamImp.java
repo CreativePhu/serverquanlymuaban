@@ -57,7 +57,7 @@ public class LoaiSanPhamImp extends UnicastRemoteObject implements LoaiSanPhamIn
 		try {
 			session.begin();
 			LoaiSanPham loaiSanPham = entityManager.find(LoaiSanPham.class, id);
-			if(!loaiSanPham.getSanPham().isEmpty()){
+			if(loaiSanPham.getSanPham() != null && !loaiSanPham.getSanPham().isEmpty()){
 				throw new RemoteException("Loại sản phẩm này đang được sử dụng");
 			}
 			entityManager.remove(loaiSanPham);

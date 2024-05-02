@@ -87,10 +87,14 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 		try {
 			transaction.begin();
 			SanPham sanPham = entityManager.find(SanPham.class, idSanPham);
+			if (!sanPham.getChiTietHoaDon().isEmpty()) {
+				throw new RemoteException("Không thể xóa sản phẩm đang được sử dụng trong hóa đơn");
+			}
 			entityManager.remove(sanPham);
 			transaction.commit();
 		} catch (Exception e) {
             transaction.rollback();
+			throw e;
 		}
 	}
 }

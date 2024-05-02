@@ -29,7 +29,7 @@ public class Quyen implements Serializable {
 	@Column(name = "ten_quyen", length = 50, nullable = false, unique = true)
 	private String tenQuyen;
 
-	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "quyen")
+	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "quyen", fetch = FetchType.EAGER)
 	private List<TaiKhoan> taiKhoan;
 
 	public Quyen(String tenQuyen) {

@@ -68,11 +68,19 @@ public class QuyenImp extends UnicastRemoteObject implements QuyenInf{
 		try {
 			session.begin();
 			Quyen quyen = entityManager.find(Quyen.class, id);
+			if (quyen == null) {
+				throw new RemoteException("Không tìm thấy quyền với ID: " + id);
+			}
+			if (quyen.getTaiKhoan() != null && quyen.getTaiKhoan().size() > 0) {
+				throw new RemoteException("Quyền này đang được sử dụng bởi tài khoản khác!");
+			}
 			entityManager.remove(quyen);
 			entityManager.flush();
 			session.commit();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			session.rollback();
+			throw e;
 		}
 	}
 

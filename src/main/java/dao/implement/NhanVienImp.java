@@ -3,6 +3,8 @@ package dao.implement;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.Set;
+
 import dao.NhanVienInf;
 import dao.QuyenInf;
 import jakarta.persistence.EntityManager;
@@ -106,17 +108,43 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 		EntityTransaction session = entityManager.getTransaction();
 		try {
 			session.begin();
-			NhanVien nhanVienDB = entityManager.find(NhanVien.class, Long.parseLong(nhanVienID));
-			for (HoaDon hoaDon : nhanVienDB.getDanhSachHoaDon()) {
-				hoaDon.setNhanVien(null);
+
+			// Find the NhanVien entity
+			NhanVien nhanVien = entityManager.find(NhanVien.class, Long.parseLong(nhanVienID));
+
+			// If the NhanVien is null, throw an exception
+			if (nhanVien == null) {
+				throw new RemoteException("Không tìm thấy nhân viên với ID: " + nhanVienID);
 			}
-			TaiKhoan taiKhoan = nhanVienDB.getTaiKhoan();
+
+			// If the NhanVien has any HoaDon, throw an exception
+			Set<HoaDon> danhSachHoaDon = nhanVien.getDanhSachHoaDon();
+			if (danhSachHoaDon != null && !danhSachHoaDon.isEmpty()) {
+				throw new RemoteException("Nhân viên này đã thực hiện giao dịch không thể xóa !");
+			}
+
+			// Remove the association between NhanVien and TaiKhoan
+			TaiKhoan taiKhoan = nhanVien.getTaiKhoan();
+
+			// If the TaiKhoan is null, throw an exception
+			if (taiKhoan == null) {
+				throw new RemoteException("Nhân viên này không có tài khoản !");
+			}
+
+			nhanVien.setTaiKhoan(null);
+			taiKhoan.setNhanVien(null);
+
+			// Remove the TaiKhoan entity first
 			entityManager.remove(taiKhoan);
-			entityManager.remove(nhanVienDB);
-			entityManager.flush();
+
+			// Then remove the NhanVien entity
+			entityManager.remove(nhanVien);
+
 			session.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			session.rollback();
+			throw e;
 		}
 	}
 

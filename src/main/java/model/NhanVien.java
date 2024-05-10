@@ -3,16 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,12 +38,11 @@ public class NhanVien implements Serializable {
     @Column(name = "gioi_tinh", nullable = false)
     private boolean gioiTinh;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ten_tai_khoan")
     private TaiKhoan taiKhoan;
 
-    @OneToMany(mappedBy = "nhanVien", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-            CascadeType.REFRESH})
+    @OneToMany(mappedBy = "nhanVien", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     private Set<HoaDon> danhSachHoaDon;
 
     public NhanVien(String tenNhanVien, String soDienThoai, String gmail, String diaChi, boolean gioiTinh) {

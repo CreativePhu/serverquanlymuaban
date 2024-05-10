@@ -6,8 +6,8 @@ import java.util.List;
 
 import dao.SanPhamInf;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import model.LoaiSanPham;
 import model.SanPham;
 
 public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
@@ -73,8 +73,12 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 	public void capNhatSanPham(SanPham sanPham, Long maLoaiSanPham) throws RemoteException {
 		try {
 			entityManager.getTransaction().begin();
-			sanPham.setLoaiSanPham(entityManager.find(model.LoaiSanPham.class, maLoaiSanPham));
-			entityManager.merge(sanPham);
+			LoaiSanPham loaiSanPham = entityManager.find(LoaiSanPham.class, maLoaiSanPham);
+			SanPham sanPham1 = entityManager.find(SanPham.class, sanPham.getIdSanPham());
+			sanPham1.setTenSanPham(sanPham.getTenSanPham());
+			sanPham1.setGiaSanPham(sanPham.getGiaSanPham());
+			sanPham1.setLoaiSanPham(loaiSanPham);
+			entityManager.merge(sanPham1);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
@@ -83,18 +87,16 @@ public class SanPhamImp extends UnicastRemoteObject implements SanPhamInf {
 
 	@Override
 	public void xoaSanPham(Long idSanPham) throws RemoteException {
-		EntityTransaction transaction = entityManager.getTransaction();
+		Query query = entityManager.createQuery("DELETE FROM SanPham sp WHERE sp.idSanPham = :idSanPham");
 		try {
-			transaction.begin();
-			SanPham sanPham = entityManager.find(SanPham.class, idSanPham);
-			if (!sanPham.getChiTietHoaDon().isEmpty()) {
-				throw new RemoteException("Không thể xóa sản phẩm đang được sử dụng trong hóa đơn");
-			}
-			entityManager.remove(sanPham);
-			transaction.commit();
+			entityManager.getTransaction().begin();
+			query.setParameter("idSanPham", idSanPham);
+			query.executeUpdate();
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
-            transaction.rollback();
-			throw e;
+			entityManager.getTransaction().rollback();
+			throw new RemoteException("San pham dang duoc su dung trong hoa don. Khong the xoa!");
 		}
 	}
+
 }

@@ -38,7 +38,7 @@ public class NhanVien implements Serializable {
     @Column(name = "gioi_tinh", nullable = false)
     private boolean gioiTinh;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "ten_tai_khoan")
     private TaiKhoan taiKhoan;
 

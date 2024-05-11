@@ -103,6 +103,51 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 		}
 	}
 
+//	@Override
+//	public void xoaNhanVien(String nhanVienID) throws RemoteException {
+//		EntityTransaction session = entityManager.getTransaction();
+//		try {
+//			session.begin();
+//
+//			// Find the NhanVien entity
+//			NhanVien nhanVien = entityManager.find(NhanVien.class, Long.parseLong(nhanVienID));
+//
+//			// If the NhanVien is null, throw an exception
+//			if (nhanVien == null) {
+//				throw new RemoteException("Không tìm thấy nhân viên với ID: " + nhanVienID);
+//			}
+//
+//			// If the NhanVien has any HoaDon, throw an exception
+//			Set<HoaDon> danhSachHoaDon = nhanVien.getDanhSachHoaDon();
+//			if (danhSachHoaDon != null && !danhSachHoaDon.isEmpty()) {
+//				throw new RemoteException("Nhân viên này đã thực hiện giao dịch không thể xóa !");
+//			}
+//
+//			// Remove the association between NhanVien and TaiKhoan
+//			TaiKhoan taiKhoan = nhanVien.getTaiKhoan();
+//
+//			// If the TaiKhoan is null, throw an exception
+//			if (taiKhoan == null) {
+//				throw new RemoteException("Nhân viên này không có tài khoản !");
+//			}
+//
+//			nhanVien.setTaiKhoan(null);
+//			taiKhoan.setNhanVien(null);
+//
+//			// Remove the TaiKhoan entity first
+//			entityManager.remove(taiKhoan);
+//
+//			// Then remove the NhanVien entity
+//			entityManager.remove(nhanVien);
+//
+//			session.commit();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			session.rollback();
+//			throw e;
+//		}
+//	}
+
 	@Override
 	public void xoaNhanVien(String nhanVienID) throws RemoteException {
 		EntityTransaction session = entityManager.getTransaction();
@@ -123,21 +168,7 @@ public class NhanVienImp extends UnicastRemoteObject implements NhanVienInf{
 				throw new RemoteException("Nhân viên này đã thực hiện giao dịch không thể xóa !");
 			}
 
-			// Remove the association between NhanVien and TaiKhoan
-			TaiKhoan taiKhoan = nhanVien.getTaiKhoan();
-
-			// If the TaiKhoan is null, throw an exception
-			if (taiKhoan == null) {
-				throw new RemoteException("Nhân viên này không có tài khoản !");
-			}
-
-			nhanVien.setTaiKhoan(null);
-			taiKhoan.setNhanVien(null);
-
-			// Remove the TaiKhoan entity first
-			entityManager.remove(taiKhoan);
-
-			// Then remove the NhanVien entity
+			// Remove the NhanVien entity
 			entityManager.remove(nhanVien);
 
 			session.commit();
